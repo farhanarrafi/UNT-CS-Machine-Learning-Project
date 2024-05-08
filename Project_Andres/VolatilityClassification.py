@@ -3,7 +3,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, matthews_corrcoef
+from sklearn.metrics import  matthews_corrcoef
+
 
 def add_noise_to_column(df, column_name, noise_level):
     """
@@ -37,7 +39,7 @@ filename = 'feature_and_target.csv'
 df = pd.read_csv(filename)
 df_cleaned = df.dropna()
 
-
+# df_cleaned.to_csv('output_file_vol2.csv', index=False)
 
 normal_data = df_cleaned[df_cleaned['risky'] == 0]
 anomaly_data = df_cleaned[df_cleaned['risky'] == 1]
@@ -99,3 +101,5 @@ print("Accuracy:", accuracy)
 print("Precision:", precision)
 print("Sensitivity (Recall):", sensitivity)
 print("F1 Score:", f1)
+mcc = matthews_corrcoef(y_test, y_pred)
+print(f"GaussianNB mcc: {mcc}")
